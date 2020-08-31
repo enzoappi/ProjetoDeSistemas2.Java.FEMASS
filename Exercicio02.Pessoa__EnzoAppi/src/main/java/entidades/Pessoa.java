@@ -25,6 +25,6 @@ public abstract class Pessoa {
         this.nome = nome;
     }
     
-    public abstract Double calcularIR();
+    public abstract Double calcularIR(double salario);
     
 }

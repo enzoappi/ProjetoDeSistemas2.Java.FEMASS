@@ -13,5 +13,5 @@ public class ClasseAbstrata3 extends ClasseAbstrata2{
     
     public void Metodo1() {
         System.out.println("Ola, eu sou o metodo I");
-    };  
+    }  
 }
