@@ -11,14 +11,17 @@ package entidades;
  */
 public class Robo implements Controle{
     
+    @Override
     public void andar() {
         System.out.println("\nROBO ANDANDO!");
     }
     
+    @Override
     public void virar() {
         System.out.println("\nROBO VIRANDO!");
     }
     
+    @Override
     public void falar() {
         System.out.println("\nROBO FALANDO!");
     }
