@@ -23,6 +23,10 @@ public class UtilizacaoConcluida extends EstadoUtilizacao{
         this.horaFimEfetivo = LocalTime.now().plusHours(3);
         this.inicioEfetivoOcorrencia = inicioEfetivoOcorrencia;
     }
+
+    public UtilizacaoConcluida(LocalTime horaFimEfetivo) {
+        this.horaFimEfetivo = horaFimEfetivo;
+    }
     
     public void iniciar(Utilizacao utilizacao) {
         utilizacao.setEstadoUtilizacao(this);
@@ -31,13 +35,19 @@ public class UtilizacaoConcluida extends EstadoUtilizacao{
         utilizacao.setEstadoUtilizacao(this);
     }
     public void aguardarProxima(Utilizacao utilizacao) {
-        System.out.println("A ocorrencia iniciada em " + (utilizacao.getDataInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
-                + " as " + (this.inicioEfetivoOcorrencia.getHoraInicioEfetivoOcorrencia().format(DateTimeFormatter.ofPattern("HH:mm:ss"))) 
-                +" foi finalizada em " + (utilizacao.getDataFim().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
-                + " as: " + this.horaFimEfetivo.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        System.out.println("Situacao atual: " + utilizacao.getEstadoUtilizacao().toString().toUpperCase());
-        System.out.println("----------------------------------------------------------------------------------------------------------");
-        utilizacao.setEstadoUtilizacao(new AguardandoUtilizacao());
+        try {
+            System.out.println("A ocorrencia iniciada em " + (utilizacao.getDataInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
+                    + " as " + (this.inicioEfetivoOcorrencia.getHoraInicioEfetivoOcorrencia().format(DateTimeFormatter.ofPattern("HH:mm:ss"))) 
+                    +" foi finalizada em " + (utilizacao.getDataFim().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
+                    + " as: " + this.horaFimEfetivo.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            System.out.println("Situacao atual: " + utilizacao.getEstadoUtilizacao().toString().toUpperCase());
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            utilizacao.setEstadoUtilizacao(new AguardandoUtilizacao());
+        } catch(NullPointerException npe) {
+            utilizacao.setEstadoUtilizacao(new AguardandoUtilizacao());
+            System.out.println("A utilizacao da viatura encerrou-se em " + (utilizacao.getDataFim().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
+                    + " as: " + this.horaFimEfetivo.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " sem registro de atendimento de ocorrencias.");
+        }
     }
     
     @Override

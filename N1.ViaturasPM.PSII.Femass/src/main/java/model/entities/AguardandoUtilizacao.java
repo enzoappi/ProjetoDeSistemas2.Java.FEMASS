@@ -7,6 +7,7 @@ package model.entities;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import model.enums.TipoOcorrencia;
 import model.services.EstadoUtilizacao;
 
@@ -38,16 +39,29 @@ public class AguardandoUtilizacao extends EstadoUtilizacao{
     }
 
     public void iniciar(Utilizacao utilizacao) {
-        utilizacao.getOcorrencia().setTipoOcorrencia(TipoOcorrencia.Perseguição);
-        utilizacao.getOcorrencia().setOcorrenciaIniciada(new OcorrenciaIniciada(((int) (Math.random()*998999999)+100000000)/*, TipoOcorrencia.Perseguição*/, this.horaInicio));
-        System.out.println("Tipo da ocorrencia: " + utilizacao.getOcorrencia().toString() 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nQual a ocorrência do chamado? ");
+        String tpOcorrTemp = sc.next();
+        System.out.println("");
+        TipoOcorrencia tpOcorr = TipoOcorrencia.valueOf(tpOcorrTemp.toUpperCase());
+        utilizacao.getOcorrencia().setTipoOcorrencia((TipoOcorrencia) tpOcorr);
+        try {
+//            utilizacao.getOcorrencia().setOcorrenciaIniciada(new OcorrenciaIniciada(((int) (Math.random()*998999999)+100000000), this.horaInicio));
+            utilizacao.getOcorrencia().setOcorrenciaIniciada(((int) (Math.random()*998999999)+100000000), this.horaInicio);
+            System.out.println("Tipo da ocorrencia: " + utilizacao.getOcorrencia().toString() 
                 + "\nData da chamada: " + (utilizacao.getDataInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) 
                 + " as: " + utilizacao.getOcorrencia().getOcorrenciaIniciada().getHoraChamadaOcorrencia().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        System.out.println("----------------------------------------------------------------------------------------------------------");
-          utilizacao.setEstadoUtilizacao(new EmUtilizacao(this.fimEstimadoOcorrencia));
+            System.out.println("----------------------------------------------------------------------------------------------------------");
+            utilizacao.setEstadoUtilizacao(new EmUtilizacao(this.fimEstimadoOcorrencia));
+        } catch(NullPointerException npe) {
+            System.out.println(npe.getMessage());
+            System.out.println("Situação de momento: " + toString().toUpperCase());
+            return;
+        }
     }
     public void finalizar(Utilizacao utilizacao) {
-        utilizacao.setEstadoUtilizacao(this);
+        utilizacao.setEstadoUtilizacao(new UtilizacaoConcluida(this.fimEstimadoOcorrencia.getHoraFimEstimadoO()));
+//        System.out.println("Fim da utilizacao da viatura, sem atendimento de ocorrencia.");
     }
     
     public void aguardarProxima(Utilizacao utilizacao) {
@@ -58,7 +72,4 @@ public class AguardandoUtilizacao extends EstadoUtilizacao{
     public String toString() {
         return "Aguardando";
     }
-    
-    
-    
 }

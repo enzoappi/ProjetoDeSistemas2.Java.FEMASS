@@ -45,4 +45,9 @@ public class Telefone {
     public void setFonePrincipal(boolean fonePrincipal) {
         this.fonePrincipal = fonePrincipal;
     }
+
+    @Override
+    public String toString() {
+        return "Telefone: " + "(" + ddd + ")" + numero + " Principal:" + fonePrincipal + '.';
+    }
 }

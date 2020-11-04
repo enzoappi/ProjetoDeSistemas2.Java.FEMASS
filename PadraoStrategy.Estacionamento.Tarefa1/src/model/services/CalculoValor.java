@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.enums;
+package model.services;
+
+import model.entities.ContaEstacionamento;
 
 /**
  *
  * @author enzoappi
  */
-public enum TipoOcorrencia {
-    NENHUMA,
-    BLITZ,
-    GUARDA,
-    ESCOLTA,
-    PERSEGUICAO,
-    RONDA,
-    CONDUCAO;
+public interface CalculoValor {
+    
+    public String calcular(ContaEstacionamento contaEstacionamento);
+    
 }

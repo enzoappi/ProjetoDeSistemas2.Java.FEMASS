@@ -99,4 +99,27 @@ public class Batalhao {
     public List<Policial> getPoliciais() {
         return this.policiais;
     }
+
+    @Override
+    public String toString() {
+        return "" + nome;
+    }
+    
+    public void mostraPoliciais() {
+        for(Policial p : this.policiais) {
+            System.out.println(p + "" );
+        }
+    }
+    
+    public void mostraViaturas() {
+        for(Viatura v : this.viaturas) {
+            System.out.println(v.mostraViatura() + "" );
+        }
+    }
+    
+    public void mostraTelefoneBatalhao() {
+        for(Telefone t : this.telefones) {
+            System.out.println("telefone(s): (" + t.getDdd() + ")" + t.getNumero());
+        }
+    }
 }

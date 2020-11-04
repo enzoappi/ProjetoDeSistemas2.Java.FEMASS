@@ -23,12 +23,11 @@ public class Policial {
 //    private List<Ocorrencia> ocorrencias = new ArrayList();
     private Viatura viatura;
 
-    public Policial(String nome, String matricula, String rg, String patente, Endereco endereco) {
+    public Policial(String nome, String matricula, String rg, String patente) {
         this.nome = nome;
         this.matricula = matricula;
         this.rg = rg;
         this.patente = patente;
-        this.endereco = endereco;
     }
 
     public String getNome() {
@@ -101,5 +100,10 @@ public class Policial {
 
     public void setViatura(Viatura viatura) {
         this.viatura = viatura;
+    }
+
+    @Override
+    public String toString() {
+        return "Policial: " + nome + ", matricula: " + matricula + ", rg: " + rg + ", patente: " + patente + ", " + telefones + "";
     }
 }

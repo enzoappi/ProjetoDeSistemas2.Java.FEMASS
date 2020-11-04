@@ -24,6 +24,7 @@ public class Viatura {
     private String cor;
     
     private EstadoViatura estadoViatura;
+    private Batalhao batalhao;
     private List<Utilizacao> utilizacoes = new ArrayList();
     private List<Policial> policiais = new ArrayList();
 
@@ -113,6 +114,14 @@ public class Viatura {
     public void retornoManutencao(){
         this.estadoViatura.retornoManutencao(this);
     }
+
+    public Batalhao getBatalhao() {
+        return batalhao;
+    }
+
+    public void setBatalhao(Batalhao batalhao) {
+        this.batalhao = batalhao;
+    }
     
     public void adicionarUtilizacao(Utilizacao utilizacao) {
         this.utilizacoes.add(utilizacao);
@@ -143,5 +152,10 @@ public class Viatura {
         return "" + estadoViatura + ".";
     }
     
+    public String mostraViatura() {
+        return "Viatura: " + codPatrimonio + ", placa: " + placa + ", marca: " 
+                + marca + ", modelo: "  + modelo + ", anoFabr: " + anoFabricacao 
+                + ", cor: " + cor + "";
+    } 
     
 }

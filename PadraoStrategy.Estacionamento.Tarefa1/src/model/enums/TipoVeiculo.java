@@ -9,12 +9,8 @@ package model.enums;
  *
  * @author enzoappi
  */
-public enum TipoOcorrencia {
-    NENHUMA,
-    BLITZ,
-    GUARDA,
-    ESCOLTA,
-    PERSEGUICAO,
-    RONDA,
-    CONDUCAO;
+public enum TipoVeiculo {
+    Moto,
+    Carro,
+    Caminhao;
 }

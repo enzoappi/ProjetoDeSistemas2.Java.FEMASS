@@ -5,6 +5,7 @@
  */
 package model.entities;
 
+import java.time.LocalTime;
 import model.enums.TipoOcorrencia;
 
 /**
@@ -15,14 +16,11 @@ public class OcorrenciaPendente {
     
     private TipoOcorrencia tipoOcorrencia;
     
-    private OcorrenciaIniciada ocorrenciaIniciada = new OcorrenciaIniciada();
-
-    public OcorrenciaPendente(TipoOcorrencia tipoOcorrencia) {
-        this.tipoOcorrencia = tipoOcorrencia;
-    }
+    private OcorrenciaIniciada ocorrenciaIniciada;
 
     public OcorrenciaPendente() {
-        this.tipoOcorrencia = TipoOcorrencia.Nenhuma;
+        this.tipoOcorrencia = TipoOcorrencia.NENHUMA;
+        this.ocorrenciaIniciada = null;
     }
 
     public TipoOcorrencia getTipoOcorrencia() {
@@ -33,16 +31,23 @@ public class OcorrenciaPendente {
         this.tipoOcorrencia = tipoOcorrencia;
     }
 
+    
     public OcorrenciaIniciada getOcorrenciaIniciada() {
-        if(!(this.tipoOcorrencia.equals(TipoOcorrencia.Nenhuma))) {
-            return this.ocorrenciaIniciada;
+        if(this.ocorrenciaIniciada == null) {
+            throw new NullPointerException("\nAlgo inseperado aconteceu!\nNão constam ocorrências cadastradas no Sistema, para a viatura!\n");
         }
-        return null;
+        return this.ocorrenciaIniciada;
     }
 
-    public void setOcorrenciaIniciada(OcorrenciaIniciada ocorrenciaIniciada) {
-        if(!(this.tipoOcorrencia.equals(TipoOcorrencia.Nenhuma))) {
-            this.ocorrenciaIniciada = ocorrenciaIniciada;
+//    public void setOcorrenciaIniciada(OcorrenciaIniciada ocorrenciaIniciada) {
+//        if(!(this.tipoOcorrencia.equals(TipoOcorrencia.Nenhuma))) {
+//            this.ocorrenciaIniciada = ocorrenciaIniciada;
+//        }
+//    }
+    
+    public void setOcorrenciaIniciada(Integer codOcorrencia, LocalTime horaChamadaOcorrencia) {
+        if(!(this.tipoOcorrencia.equals(TipoOcorrencia.NENHUMA))) {
+            this.ocorrenciaIniciada = new OcorrenciaIniciada(codOcorrencia, horaChamadaOcorrencia);
         }
     }
     
